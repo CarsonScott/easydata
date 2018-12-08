@@ -1,5 +1,5 @@
 # EasyData
-A simple and lightweight database and graph library in python.
+A simple and lightweight database/graph library in python.
 
 ## Databases
 Databases are dictionaries with additional structure built on top. A database consists of schemas, objects, and attributes, which are all related symbolically.

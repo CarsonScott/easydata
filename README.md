@@ -47,4 +47,9 @@ An extracted object may be edited and then reinserted back into the database:
 
     p2 = db.extract_object('p1')
     p2['key'] = 'p2'
+    p2['attributes']['x']=3
+    p2['attributes']['y']=9
     db.insert_object(p2)
+
+    db.get_attrs('p2')
+    >>> {'x':3, 'y':9}

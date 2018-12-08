@@ -3,6 +3,8 @@ A simple and lightweight database and graph library in python.
 
 ## Code
 
+### Databases
+
 A schema is a type of object defined within a database. We will now create a schema for defining points in space.
     
     db = Database()
@@ -53,3 +55,33 @@ An extracted object may be edited and then reinserted back into the database:
 
     db.get_attrs('p2')
     >>> {'x':3, 'y':9}
+
+### Graphs
+
+Graphs are databases with prebuilt schemas for defining links between objects. They also have a few additional methods for dealing with links as objects themselves.
+
+    graph = Graph()
+    graph.create_schema('point', ['x', 'y'])
+    graph.create_object('point', 'p1', None, [5, 6])
+    graph.create_object('point', 'p2', None, [3, 9])
+
+Every object in a graph is assigned 2 additional attributes for dealing with links:
+    
+    >>> graph.get_attrs('p1')
+    >>> {'x': 5, 'y': 6, 'sources': [], 'targets': [])
+
+Links are created using a 'source' and 'target' key, which point to objects within the graph:
+
+    >>> graph.create_link('p1', 'p2')
+    
+Each link is assigned a key that has been generated based on its source and target objects:
+    
+    >>> graph.get_key('p1', 'p2')
+    >>> '(p1 p2)'
+
+The attributes of the source and target objects are edited when the link is created:
+
+    >>> graph.get_attrs('p1')
+    >>> {'x': 5, 'y': 6, 'sources': [], 'targets': ['p2'])
+    >>> graph.get_attrs('p2')
+    >>> {'x': 3, 'y': 9, 'sources': ['p1'], 'targets': [])

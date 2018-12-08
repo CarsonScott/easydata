@@ -1,9 +1,7 @@
 # easydata
 A simple and lightweight database and graph library in python.
 
-## Code
-
-### Databases
+## Databases
 
 A schema is a type of object defined within a database. We will now create a schema for defining points in space.
     
@@ -56,7 +54,7 @@ An extracted object may be edited and inserted back into the database:
     db.get_attrs('p2')
     >>> {'x':3, 'y':9}
 
-### Graphs
+## Graphs
 
 Graphs are databases with a preset schema for defining links between objects. Graphs also come with a few additional methods for dealing with the link objects.
 

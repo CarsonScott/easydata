@@ -11,7 +11,7 @@ A database consists of schemas, objects, and attributes, which are all related s
 
 A schema defines a label and a set of attributes, and are used to create new objects. 
 
-![Schema diagram](https://github.com/CarsonScott/easydata/blob/master/4927232E-8D0E-4211-9546-594CF7557A5B.jpeg)
+![Schema diagram](https://github.com/CarsonScott/easydata/blob/master/img/4927232E-8D0E-4211-9546-594CF7557A5B.jpeg)
 
 We can define a schema to represent positions in 2D space:
     
@@ -24,7 +24,7 @@ As you can see the schema labeled 'point' defines two attributes: 'x' and 'y'.
 
 Objects created using the point schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created. 
 
-![Object diagram](https://github.com/CarsonScott/easydata/blob/master/D5C8A2F0-94B4-46C2-A9D7-BE7A3FE94563.jpeg)
+![Object diagram](https://github.com/CarsonScott/easydata/blob/master/img/D5C8A2F0-94B4-46C2-A9D7-BE7A3FE94563.jpeg)
 
 We can create a new object using the point schema:
 

@@ -15,7 +15,7 @@ As you can see the schema labeled 'point' defines two attributes: 'x' and 'y'.
 
 Objects created using the point schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created. 
 
-We can create a point-object using the point-schema:
+We can create a new object using the point schema:
 
     db.create_object('point', 'p1', None, [5, 6])
     

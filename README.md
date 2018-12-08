@@ -19,7 +19,7 @@ We can create a point-object using the point-schema:
     
 The database now contains an object called 'p1', equal to None, which has attributes 'x' and 'y', equal to 5 and 6 respectively.
 
-The value of an object is stored in a database as a typical dictionary element.
+The value of an object is stored in a database as a typical dictionary element:
 
     db['p1']
     >>> None
@@ -31,7 +31,7 @@ The individual attributes of an object are accessible through methods:
     db.get_attr('p1', 'y')
     >>> 6
 
-Alternatively, attributes are accessible using an alternative strategy:
+Attributes are accessible using an alternative strategy:
 
     db['p1', 'x']   # equivalent to db.get_attr('p1', 'x')
     >>> 5
@@ -82,7 +82,7 @@ Every link is assigned a generated key based on the source and target keys used 
     >>> graph.get_key('p1', 'p2')
     >>> '(p1 p2)'
 
-The source and target objects' attributes are updated upon creation of a new link:
+The source and target objects' attributes are updated when a new link is created:
 
     >>> graph.get_attrs('p1')
     >>> {'x': 5, 'y': 6, 'sources': [], 'targets': ['p2'])

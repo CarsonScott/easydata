@@ -9,16 +9,22 @@ Databases are dictionaries with additional structure built on top.
 
 A database consists of schemas, objects, and attributes, which are all related symbolically. 
 
-A schema defines a label and a set of attributes, and are used to create new objects. We can define a schema to represent positions in 2D space:
+A schema defines a label and a set of attributes, and are used to create new objects. 
+
+![Schema diagram](https://github.com/CarsonScott/easydata/blob/master/4927232E-8D0E-4211-9546-594CF7557A5B.jpeg)
+
+We can define a schema to represent positions in 2D space:
     
     db = Database()
     db.create_schema('point', ['x', 'y'])
-
+    
 __II. Objects__
 
 As you can see the schema labeled 'point' defines two attributes: 'x' and 'y'.
 
 Objects created using the point schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created. 
+
+![Object diagram](https://github.com/CarsonScott/easydata/blob/master/D5C8A2F0-94B4-46C2-A9D7-BE7A3FE94563.jpeg)
 
 We can create a new object using the point schema:
 
@@ -30,7 +36,7 @@ The value of an object is stored in a database as a typical dictionary element:
 
     db['p1']
     >>> None
-
+    
 __III. Attributes__
 
 The individual attributes of an object are accessible through methods:
@@ -69,6 +75,8 @@ An extracted dictionary may be used to create a new object:
 
     db.get_attrs('p2')
     >>> {'x':3, 'y':9}
+
+*** 
 
 ## Graphs
 
@@ -116,3 +124,4 @@ Links between links may be defined in an infinite hierarchy.
     graph.get_attrs(graph.get_key('p1', 'p2')) 
     >>> {'source': 'p1', 'target': 'p2', 'sources': [], 'targets': [])
 
+***

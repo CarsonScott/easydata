@@ -2,48 +2,53 @@
 A simple and lightweight database and graph library in python.
 
 ## Databases
+Databases are dictionaries with additional structure built on top. A database consists of schemas, objects, and attributes, which are all related symbolically.
 
-A schema is a type of object defined within a database. We will now create a schema for defining points in space.
+A schema is defined by a label and a set of attributes. They are used to create new objects.
+
+we can define points in 2D space using a schema called 'point', as an example:
     
     db = Database()
     db.create_schema('point', ['x', 'y'])
 
-As you can see, a point is defined by 'x' and 'y' coordinates. Now we will create an object representing an instance of a point.
+As you can see the point-schema defines two attributes: 'x' and 'y'. Objects created using the point-schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created.
+
+We can create a point-object using the point-schema:
 
     db.create_object('point', 'p1', None, [5, 6])
     
-The database now contains an object 'p1' equal to None, with 'x' and 'y' attributes equal to 5 and 6 respectively.
+The database now contains an object called 'p1', equal to None, which has attributes 'x' and 'y', equal to 5 and 6 respectively.
 
-We can access the value of a particular object using the database like a dictionary:
+The value of an object is stored in a database as a typical dictionary element.
 
     db['p1']
     >>> None
 
-The individual attributes of an object are also accessible:
+The individual attributes of an object are accessible through methods:
 
     db.get_attr('p1', 'x)
     >>> 5
     db.get_attr('p1', 'y')
     >>> 6
 
-Alternatively, attributes may be accessed through a simpler method:
+Alternatively, attributes are accessible using an alternative strategy:
 
     db['p1', 'x']   # equivalent to db.get_attr('p1', 'x')
     >>> 5
     db['p1', 'y']   # equivalent to db.get_attr('p1', 'y')
     >>> 6
 
-Every attribute of an object may be accessed together:
+Every attribute of an object is accessible as a dictionary:
     
     db.get_attrs('p1')
     >>> {'x':5, 'y':6}
     
-A copy of the total set of information defining a particular object may be extracted:
+Total information about a particular object is accessible by extracting a dictionary:
 
     db.extract_object('p1')
     >>> {'key': 'p1', 'value': None, 'type': 'point', 'attributes': {'x': 5, 'y':6}}
 
-An extracted object may be edited and inserted back into the database:
+An extracted dictionary may be used to create a new object:
 
     p2 = db.extract_object('p1')
     p2['key'] = 'p2'

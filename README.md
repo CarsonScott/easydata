@@ -2,16 +2,26 @@
 A simple and lightweight database/graph library in python.
 
 ### Databases
-Databases are dictionaries with additional structure built on top. A database consists of schemas, objects, and attributes, which are all related symbolically. A schema defines a label and a set of attributes, and are used to create new objects. We can define a point-schema to represent positions in 2D space:
+Databases are dictionaries with additional structure built on top. 
+
+A database consists of schemas, objects, and attributes, which are all related symbolically. 
+
+A schema defines a label and a set of attributes, and are used to create new objects. We can define a point-schema to represent positions in 2D space:
     
     db = Database()
     db.create_schema('point', ['x', 'y'])
 
-As you can see the point-schema defines two attributes: 'x' and 'y'. Objects created using the point-schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created. We can create a point-object using the point-schema:
+As you can see the point-schema defines two attributes: 'x' and 'y'.
+
+Objects created using the point-schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created. 
+
+We can create a point-object using the point-schema:
 
     db.create_object('point', 'p1', None, [5, 6])
     
-The database now contains an object called 'p1', equal to None, which has attributes 'x' and 'y', equal to 5 and 6 respectively. The value of an object is stored in a database as a typical dictionary element:
+The database now contains an object called 'p1', equal to None, which has attributes 'x' and 'y', equal to 5 and 6 respectively. 
+
+The value of an object is stored in a database as a typical dictionary element:
 
     db['p1']
     >>> None

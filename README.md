@@ -4,9 +4,7 @@ A simple and lightweight database and graph library in python.
 ## Databases
 Databases are dictionaries with additional structure built on top. A database consists of schemas, objects, and attributes, which are all related symbolically.
 
-A schema is defined by a label and a set of attributes. They are used to create new objects.
-
-we can define points in 2D space using a schema called 'point', as an example:
+A schema defines a label and a set of attributes. They are used to create new objects. We can define points in 2D space using a schema called 'point', as an example:
     
     db = Database()
     db.create_schema('point', ['x', 'y'])
@@ -28,6 +26,7 @@ The individual attributes of an object are accessible through methods:
 
     db.get_attr('p1', 'x)
     >>> 5
+    
     db.get_attr('p1', 'y')
     >>> 6
 
@@ -35,6 +34,7 @@ Attributes are accessible using an alternative strategy:
 
     db['p1', 'x']   # equivalent to db.get_attr('p1', 'x')
     >>> 5
+    
     db['p1', 'y']   # equivalent to db.get_attr('p1', 'y')
     >>> 6
 
@@ -70,7 +70,7 @@ Graphs are databases with a preset schema for defining links between objects. Gr
 
 Every object in a graph is assigned two additional attributes:
     
-    >>> graph.get_attrs('p1')
+    graph.get_attrs('p1')
     >>> {'x': 5, 'y': 6, 'sources': [], 'targets': [])
 
 Links are created using a 'source' and 'target' key, each pointing to an existing object:
@@ -79,19 +79,20 @@ Links are created using a 'source' and 'target' key, each pointing to an existin
     
 Every link is assigned a generated key based on the source and target keys used to define it:
     
-    >>> graph.get_key('p1', 'p2')
+    graph.get_key('p1', 'p2')
     >>> '(p1 p2)'
 
 The source and target objects' attributes are updated when a new link is created:
 
-    >>> graph.get_attrs('p1')
+    graph.get_attrs('p1')
     >>> {'x': 5, 'y': 6, 'sources': [], 'targets': ['p2'])
-    >>> graph.get_attrs('p2')
+   
+    graph.get_attrs('p2')
     >>> {'x': 3, 'y': 9, 'sources': ['p1'], 'targets': [])
     
 Every link is an object that may be the source or target of another link:
 
-    >>> graph.get_attrs(graph.get_key('p1', 'p2')) 
+    graph.get_attrs(graph.get_key('p1', 'p2')) 
     >>> {'source': 'p1', 'target': 'p2', 'sources': [], 'targets': [])
 
 

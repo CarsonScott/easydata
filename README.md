@@ -88,3 +88,10 @@ The source and target objects' attributes are updated when a new link is created
     >>> {'x': 5, 'y': 6, 'sources': [], 'targets': ['p2'])
     >>> graph.get_attrs('p2')
     >>> {'x': 3, 'y': 9, 'sources': ['p1'], 'targets': [])
+    
+Every link is an object that may be the source or target of another link:
+
+    >>> graph.get_attrs(graph.get_key('p1', 'p2')) 
+    >>> {'source': 'p1', 'target': 'p2', 'sources': [], 'targets': [])
+
+

@@ -40,12 +40,12 @@ Every attribute of an object may be accessed together:
     db.get_attrs('p1')
     >>> {'x':5, 'y':6}
     
-The total set of information regarding a particular object may be extracted:
+A copy of the total set of information defining a particular object may be extracted:
 
     db.extract_object('p1')
     >>> {'key': 'p1', 'value': None, 'type': 'point', 'attributes': {'x': 5, 'y':6}}
 
-An extracted object may be edited and then reinserted back into the database:
+An extracted object may be edited and inserted back into the database:
 
     p2 = db.extract_object('p1')
     p2['key'] = 'p2'
@@ -58,28 +58,28 @@ An extracted object may be edited and then reinserted back into the database:
 
 ### Graphs
 
-Graphs are databases with prebuilt schemas for defining links between objects. They also have a few additional methods for dealing with links as objects themselves.
+Graphs are databases with a preset schema for defining links between objects. Graphs also come with a few additional methods for dealing with the link objects.
 
     graph = Graph()
     graph.create_schema('point', ['x', 'y'])
     graph.create_object('point', 'p1', None, [5, 6])
     graph.create_object('point', 'p2', None, [3, 9])
 
-Every object in a graph is assigned 2 additional attributes for dealing with links:
+Every object in a graph is assigned two additional attributes:
     
     >>> graph.get_attrs('p1')
     >>> {'x': 5, 'y': 6, 'sources': [], 'targets': [])
 
-Links are created using a 'source' and 'target' key, which point to objects within the graph:
+Links are created using a 'source' and 'target' key, each pointing to an existing object:
 
     >>> graph.create_link('p1', 'p2')
     
-Each link is assigned a key that has been generated based on its source and target objects:
+Every link is assigned a generated key based on the source and target keys used to define it:
     
     >>> graph.get_key('p1', 'p2')
     >>> '(p1 p2)'
 
-The attributes of the source and target objects are edited when the link is created:
+The source and target objects' attributes are updated upon creation of a new link:
 
     >>> graph.get_attrs('p1')
     >>> {'x': 5, 'y': 6, 'sources': [], 'targets': ['p2'])

@@ -6,14 +6,14 @@ Databases are dictionaries with additional structure built on top.
 
 A database consists of schemas, objects, and attributes, which are all related symbolically. 
 
-A schema defines a label and a set of attributes, and are used to create new objects. We can define a point-schema to represent positions in 2D space:
+A schema defines a label and a set of attributes, and are used to create new objects. We can define a schema to represent positions in 2D space:
     
     db = Database()
     db.create_schema('point', ['x', 'y'])
 
-As you can see the point-schema defines two attributes: 'x' and 'y'.
+As you can see the schema labeled 'point' defines two attributes: 'x' and 'y'.
 
-Objects created using the point-schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created. 
+Objects created using the point schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created. 
 
 We can create a point-object using the point-schema:
 

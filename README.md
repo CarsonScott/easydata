@@ -1,5 +1,6 @@
 # EasyData
-A simple and lightweight database/graph library in python.
+
+A database library for easy construction/manipulation of complex graphical data.
 
 ## Databases
 
@@ -9,7 +10,7 @@ Databases are dictionaries with additional structure built on top.
 
 A database consists of schemas, objects, and attributes, which are all related symbolically. 
 
-A schema defines a label and a set of attributes, and are used to create new objects. 
+A schema defines a label and a set of attributes, and is used to create new objects. 
 
 ![Schema diagram](https://github.com/CarsonScott/easydata/blob/master/img/4927232E-8D0E-4211-9546-594CF7557A5B.jpeg)
 

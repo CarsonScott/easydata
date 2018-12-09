@@ -48,12 +48,12 @@ The individual attributes of an object are accessible through methods:
     db.get_attr('p1', 'y')
     >>> 6
 
-Attributes are accessible using an alternative strategy:
+The following shorthand is equivalent to the method above:
 
-    db['p1', 'x']   # equivalent to db.get_attr('p1', 'x')
+    db['p1', 'x']
     >>> 5
     
-    db['p1', 'y']   # equivalent to db.get_attr('p1', 'y')
+    db['p1', 'y']   
     >>> 6
 
 Collectively, the attributes of an object are accessible as a dictionary:

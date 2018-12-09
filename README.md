@@ -29,14 +29,14 @@ Objects created using the point schema are automatically assigned those attribut
 
 We can create a new object using the point schema:
 
-    db.create_object('point', 'p1', None, [5, 6])
+    db.create_object('point', 'p1', 0, [5, 6])
     
-The database now contains an object called 'p1', equal to None, which has attributes 'x' and 'y', equal to 5 and 6 respectively. 
+The database now contains an object called 'p1', equal to 0, which has attributes 'x' and 'y', equal to 5 and 6 respectively. 
 
 The value of an object is stored in a database as a typical dictionary element:
 
     db['p1']
-    >>> None
+    >>> 0
     
 __III. Attributes__
 
@@ -64,7 +64,7 @@ Every attribute of an object is accessible as a dictionary:
 Total information about a particular object is accessible by extracting a dictionary:
 
     db.extract_object('p1')
-    >>> {'key': 'p1', 'value': None, 'type': 'point', 'attributes': {'x': 5, 'y':6}}
+    >>> {'key': 'p1', 'value': 0, 'type': 'point', 'attributes': {'x': 5, 'y':6}}
 
 An extracted dictionary may be used to create a new object:
 
@@ -89,8 +89,8 @@ Graphs also come with a few additional methods for dealing with the link objects
 
     graph = Graph()
     graph.create_schema('point', ['x', 'y'])
-    graph.create_object('point', 'p1', None, [5, 6])
-    graph.create_object('point', 'p2', None, [3, 9])
+    graph.create_object('point', 'p1', 0, [5, 6])
+    graph.create_object('point', 'p2', 0, [3, 9])
 
 Every object in a graph is assigned two additional attributes:
     

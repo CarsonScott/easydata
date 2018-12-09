@@ -1,6 +1,6 @@
 # EasyData
 
-A database library for easy construction/manipulation of complex graphical data.
+A graphical database library for simple construction and manipulation of complex data structures.
 
 ## Databases
 

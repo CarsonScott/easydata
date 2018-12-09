@@ -1,6 +1,6 @@
 # EasyData
 
-A graphical database library for easy construction and manipulation of complex data structures.
+A python database library for easy construction and manipulation of complex graphical data structures.
 
 ## Databases
 

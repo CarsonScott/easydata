@@ -56,12 +56,12 @@ Attributes are accessible using an alternative strategy:
     db['p1', 'y']   # equivalent to db.get_attr('p1', 'y')
     >>> 6
 
-Every attribute of an object is accessible as a dictionary:
+Collectively, the attributes of an object are accessible as a dictionary:
     
     db.get_attrs('p1')
     >>> {'x':5, 'y':6}
 
-Total information about a particular object is accessible by extracting a dictionary:
+Total information of a particular object is accessible by extracting a dictionary:
 
     db.extract_object('p1')
     >>> {'key': 'p1', 'value': 0, 'type': 'point', 'attributes': {'x': 5, 'y':6}}

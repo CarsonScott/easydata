@@ -30,11 +30,9 @@ These constraints ensure that any value assigned to either x or y will be a non-
     db.create_constraint('point', 'x', lambda val: isinstance(val, int) and val >= 0)
     db.create_constraint('point', 'y', lambda val: isinstance(val, int) and val >= 0)
     
-If a value is given for a particular attribute that fails to satisfy its corresponding constraints, then that attribute will not be included in the object being created. 
+If a value is given for a particular attribute while creating an object, which fails to satisfy the corresponding constraints of that attribute, then the object is never created. 
 
-For instance, any object created using the point schema which does not have a non-negative integer value assigned to its x attribute will include only a y attribute.
-
-This is assuming that the value assigned to said attribute meets the associated requirements.
+In other words, all constraints must be satisfied by a set of values in order to create an object from a given schema. 
 
 __II. Objects__
 

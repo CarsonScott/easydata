@@ -19,6 +19,17 @@ We can define a schema to represent positions in 2D space:
     db = Database()
     db.create_schema('point', ['x', 'y'])
     
+It's useful to have some control over the acceptible values that can be assigned to the attributes of a schema.
+ 
+Constraints are proposition functions that are assigned with respect to a particular attribute of a given schema.
+
+We can define constraints on the x and y attributes of the point schema defined above.
+
+These constraints ensure that any value assigned to x or y will be non-negative integers.
+
+    db.create_constraint('point', 'x', lambda val: isinstance(val, int) and val >= 0)
+    db.create_constraint('point', 'y', lambda val: isinstance(val, int) and val >= 0)
+    
 __II. Objects__
 
 As you can see the schema labeled 'point' defines two attributes: 'x' and 'y'.

@@ -31,10 +31,16 @@ class Database(Dict):
 		self[key]=value
 		attrs=self.schemas[schema]
 		for i in range(len(attrs)):
-			constraints=self.constraints[schema][attrs[i]]
-			if all(constraints[j](values[i]) for j in range(len(constraints))):
-				self.set_attr(key,attrs[i],values[i])
+			self.set_attr(key,attrs[i],values[i])
 		self.instances[schema].append(key)
+
+		for attr in self.get_attrs(key):
+			value=self.get_attr(key, attr)
+			constraints=self.constraints[schema][attr]
+			if not all(constraint(value) for constraint in constraints):
+				self.remove_object(key)
+				return False
+		return True
 
 	def create_constraint(self, schema, key, proposition):
 		self.constraints[schema][key].append(proposition)
@@ -84,3 +90,4 @@ class Database(Dict):
 	def get_attrs(self, key):return self.attributes[key]
 	def get_instances(self, schema):return self.instances[schema]
 	def is_instance(self, key, schema):return key in self.get_instances(schema)
+	

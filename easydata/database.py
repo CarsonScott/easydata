@@ -5,6 +5,7 @@ class Database(Dict):
 	def __init__(self):
 		self.schemas=dict()
 		self.attributes=dict()
+		self.constraints=dict()
 		self.instances=dict()
 	
 	def __setitem__(self, key, value):
@@ -22,14 +23,21 @@ class Database(Dict):
 
 	def create_schema(self, schema, attrs=[]):
 		self.schemas[schema]=attrs
-		self.instances[schema]=[]
+		self.instances[schema]=list()
+		self.constraints[schema]=dict()
+		for i in attrs:self.constraints[schema][i]=[]
 	
 	def create_object(self, schema, key, value=None, values=[]):
 		self[key]=value
 		attrs=self.schemas[schema]
 		for i in range(len(attrs)):
-			self.set_attr(key,attrs[i],values[i])
+			constraints=self.constraints[schema][attrs[i]]
+			if all(constraints[j](values[i]) for j in range(len(constraints))):
+				self.set_attr(key,attrs[i],values[i])
 		self.instances[schema].append(key)
+
+	def create_constraint(self, schema, key, proposition):
+		self.constraints[schema][key].append(proposition)
 
 	def extract_object(self, key):
 		value=self[key]

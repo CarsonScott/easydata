@@ -55,7 +55,7 @@ The value of an object is stored in a database as a typical dictionary element:
     
 __III. Attributes__
 
-The individual attributes of an object are accessible through methods:
+The individual attributes of an object are accessible through the following method:
 
     db.get_attr('p1', 'x)
     >>> 5
@@ -63,34 +63,13 @@ The individual attributes of an object are accessible through methods:
     db.get_attr('p1', 'y')
     >>> 6
 
-The following shorthand is equivalent to the method above:
+...or through the following short-hand:
 
     db['p1', 'x']
     >>> 5
     
     db['p1', 'y']   
     >>> 6
-
-Collectively, the attributes of an object are accessible as a dictionary:
-    
-    db.get_attrs('p1')
-    >>> {'x':5, 'y':6}
-
-Total information of a particular object is accessible by extracting a dictionary:
-
-    db.extract_object('p1')
-    >>> {'key': 'p1', 'value': 0, 'type': 'point', 'attributes': {'x': 5, 'y':6}}
-
-An extracted dictionary may be used to create a new object:
-
-    p2 = db.extract_object('p1')
-    p2['key'] = 'p2'
-    p2['attributes']['x']=3
-    p2['attributes']['y']=9
-    db.insert_object(p2)
-
-    db.get_attrs('p2')
-    >>> {'x':3, 'y':9}
 
 *** 
 

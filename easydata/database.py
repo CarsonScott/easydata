@@ -44,22 +44,6 @@ class Database(Dict):
 
 	def create_constraint(self, schema, key, proposition):
 		self.constraints[schema][key].append(proposition)
-
-	def extract_object(self, key):
-		value=self[key]
-		type=None
-		for schema in self.schemas:
-			if self.is_instance(key, schema):
-				type=schema
-				break
-		attrs=self.get_attrs(key)
-		object=Object({'key':key, 'value':value, 'type':type, 'attributes':dict()})
-		for i in attrs:
-			attr=attrs[i]
-			if isinstance(attr, Reference):
-				attr=self.extract_object(attr)
-			object['attributes'][i]=attr
-		return object
 	
 	def remove_object(self, key):
 		del self[key]
@@ -68,21 +52,6 @@ class Database(Dict):
 			if self.is_instance(key, i):
 				index=self.instances[i].index(key)
 				del self.instances[i][index]
-	
-	def insert_object(self, object):
-		if isinstance(object, Object):
-			key=object['key']
-			value=object['value']
-			schema=object['type']
-			attrs=object['attributes']
-			values=[attrs[i] for i in self.schemas[schema]]
-			if key in self:self.remove_object(key)
-			for i in range(len(values)):
-				if isinstance(values[i], Object):
-					attr_key=values[i]['key']
-					self.insert_object(values[i])
-					values[i]=Reference(attr_key)
-			self.create_object(schema, key, value, values)
 
 	def set_attr(self, key, attr, value):self.attributes[key][attr]=value
 	def get_attr(self, key, attr):return self.attributes[key][attr]

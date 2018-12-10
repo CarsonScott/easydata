@@ -25,11 +25,17 @@ Constraints are proposition functions that are assigned with respect to a partic
 
 We can define constraints on the x and y attributes of the point schema defined above.
 
-These constraints ensure that any value assigned to x or y will be non-negative integers.
+These constraints ensure that any value assigned to either x or y will be a non-negative integer.
 
     db.create_constraint('point', 'x', lambda val: isinstance(val, int) and val >= 0)
     db.create_constraint('point', 'y', lambda val: isinstance(val, int) and val >= 0)
     
+If a value is given for a particular attribute that fails to satisfy its corresponding constraints, then that attribute will not be included in the object being created. 
+
+For instance, any object created using the point schema which does not have a non-negative integer value assigned to its x attribute will include only a y attribute.
+
+This is assuming that the value assigned to said attribute meets the associated requirements.
+
 __II. Objects__
 
 As you can see the schema labeled 'point' defines two attributes: 'x' and 'y'.

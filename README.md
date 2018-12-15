@@ -165,3 +165,22 @@ The key assigned to this link reflects the hierarchical nature:
     >>> '((p1 p2) (p2 p3))'
 
 ***
+
+## Notes
+
+The set of instances for a particular schema are accessible in list form:
+
+    graph.get_instances('point')
+    >>> ['p1', 'p2', 'p3']
+
+Objects can be removed from a graph or database:
+
+    graph.remove_object('p1')
+    
+    graph.get_instances('point')
+    >>> ['p2', 'p3']
+
+An object can be tested to see if it's an instance of a particular schema:
+
+    graph.is_instance('p2', 'point')
+    >>> True

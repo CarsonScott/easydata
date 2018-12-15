@@ -146,4 +146,22 @@ Links between links may be defined in an infinite hierarchy.
     graph.get_attrs(graph.get_key('p1', 'p2')) 
     >>> {'source': 'p1', 'target': 'p2', 'weight': 6, 'sources': [], 'targets': [])
 
+As you can see, the link between 'p1' and 'p2' also has attributes 'sources' and 'targets'.
+
+    graph.create_object('point', 'p3', [1, 2])
+    graph.create_link('p2', 'p3', [2])
+
+Now there is a new point called 'p3' that is connected with 'p2'. 
+
+We can create a link between links since there are now two links in the graph:
+
+    graph.create_link(graph.get_key('p1', 'p2'), graph.get_key('p1', 'p2'), [5])
+
+The links from 'p1' to 'p2' and from 'p2' to 'p3' are now connected to one another.
+
+The key assigned to this link reflects the hierarchical nature:
+
+    graph.get_key(graph.get_key('p1', 'p2'), graph.get_key('p1', 'p2'))
+    >>> '((p1 p2) (p2 p3))'
+
 ***

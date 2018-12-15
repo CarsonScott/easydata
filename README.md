@@ -48,14 +48,14 @@ Objects created using the point schema are automatically assigned those attribut
 
 We can create a new object using the point schema:
 
-    db.create_object('point', 'p1', [5, 6, 7])
+    db.create_object('point', 'p1', [5, 6, 7], 0)
     
-The database now contains an object called 'p1', equal to None by default, which has attributes 'x', 'y' and 'z', equal to 5, 6, and 7 respectively. 
+The database now contains an object called 'p1', equal to 0 (defaults to None), which has attributes 'x', 'y' and 'z', equal to 5, 6, and 7 respectively. 
 
 The value of an object is stored in a database as a typical dictionary element:
 
     db['p1']
-    >>> None
+    >>> 0
     
 __III. Attributes__
 

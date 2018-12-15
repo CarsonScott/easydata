@@ -34,9 +34,13 @@ If a value is given for a particular attribute while creating an object, which f
 
 In other words, all constraints must be satisfied by a set of values in order to create an object from a given schema. 
 
+Attributes can be added to existing schemas as well:
+
+    db.create_attribute('point', 'z', [lambda val: isinstance(val, int) and val >= 0])
+
 __II. Objects__
 
-As you can see the schema labeled 'point' defines two attributes: 'x' and 'y'.
+As you can see the schema labeled 'point' defines two attributes: 'x', 'y', and 'z'.
 
 Objects created using the point schema are automatically assigned those attributes, and therefore require the same number of values to be defined when they are created. 
 
@@ -44,9 +48,9 @@ Objects created using the point schema are automatically assigned those attribut
 
 We can create a new object using the point schema:
 
-    db.create_object('point', 'p1', [5, 6])
+    db.create_object('point', 'p1', [5, 6, 7])
     
-The database now contains an object called 'p1', equal to None by default, which has attributes 'x' and 'y', equal to 5 and 6 respectively. 
+The database now contains an object called 'p1', equal to None by default, which has attributes 'x', 'y' and 'z', equal to 5, 6, and 7 respectively. 
 
 The value of an object is stored in a database as a typical dictionary element:
 
@@ -63,6 +67,9 @@ The individual attributes of an object are accessible through the following meth
     db.get_attr('p1', 'y')
     >>> 6
 
+    db.get_attr('p1', 'z')
+    >>> 7
+
 ...or through the following short-hand:
 
     db['p1', 'x']
@@ -70,6 +77,14 @@ The individual attributes of an object are accessible through the following meth
     
     db['p1', 'y']   
     >>> 6
+
+    db['p1', 'z']
+    >>> 7
+
+All attributes of an object are accessible as a dictionary:
+
+    db.get_attrs('p1')
+    >>> {'x':5, 'y':6, 'z':7}
 
 *** 
 

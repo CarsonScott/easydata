@@ -22,15 +22,20 @@ class Database(Dict):
 		else:return super().__getitem__(key)
 
 	def create_schema(self, schema, attrs=[]):
-		self.schemas[schema]=attrs
+		self.schemas[schema]=list()
 		self.instances[schema]=list()
 		self.constraints[schema]=dict()
-		for i in attrs:self.constraints[schema][i]=[]
+		for attr in attrs:
+			self.create_attribute(schema, attr, [])
 	
 	def create_constraint(self, schema, key, proposition):
 		self.constraints[schema][key].append(proposition)
 
-	def create_object(self, schema, key, value=None, values=[], raise_exception=True):
+	def create_attribute(self, schema, attr, constraints=[]):
+		self.schemas[schema].append(attr)
+		self.constraints[schema][attr]=constraints
+
+	def create_object(self, schema, key, values=[], value=None):
 		self[key]=value
 		attrs=self.schemas[schema]
 		for i in range(len(attrs)):
@@ -40,7 +45,9 @@ class Database(Dict):
 		invalid_attrs=[]
 		for attr in self.get_attrs(key):
 			value=self.get_attr(key, attr)
-			constraints=self.constraints[schema][attr]
+			constraints=[]
+			if attr in self.constraints[schema]:
+				constraints=self.constraints[schema][attr]
 			if not all(constraint(value) for constraint in constraints):
 				invalid_attrs.append(attr)
 
@@ -60,13 +67,15 @@ class Database(Dict):
 			exception += 'not satisfied.'
 			raise Exception(exception)
 	
-	def remove_object(self, key):
-		del self[key]
-		del self.attributes[key]
-		for i in self.schemas:
-			if self.is_instance(key, i):
-				index=self.instances[i].index(key)
-				del self.instances[i][index]
+	def remove_object(self, key):	
+		if key in self:
+			del self[key]
+		if key in self.attributes:
+			del self.attributes[key]
+		for schema in self.instances:
+			if self.is_instance(key, schema):
+				index=self.instances[schema].index(key)
+				del self.instances[schema][index]
 
 	def set_attr(self, key, attr, value):self.attributes[key][attr]=value
 	def get_attr(self, key, attr):return self.attributes[key][attr]

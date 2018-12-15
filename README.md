@@ -44,14 +44,14 @@ Objects created using the point schema are automatically assigned those attribut
 
 We can create a new object using the point schema:
 
-    db.create_object('point', 'p1', 0, [5, 6])
+    db.create_object('point', 'p1', [5, 6])
     
-The database now contains an object called 'p1', equal to 0, which has attributes 'x' and 'y', equal to 5 and 6 respectively. 
+The database now contains an object called 'p1', equal to None by default, which has attributes 'x' and 'y', equal to 5 and 6 respectively. 
 
 The value of an object is stored in a database as a typical dictionary element:
 
     db['p1']
-    >>> 0
+    >>> None
     
 __III. Attributes__
 
@@ -83,8 +83,8 @@ Graphs also come with a few additional methods for dealing with the link objects
 
     graph = Graph()
     graph.create_schema('point', ['x', 'y'])
-    graph.create_object('point', 'p1', 0, [5, 6])
-    graph.create_object('point', 'p2', 0, [3, 9])
+    graph.create_object('point', 'p1', [5, 6])
+    graph.create_object('point', 'p2', [3, 9])
 
 Every object in a graph is assigned two additional attributes:
     

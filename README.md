@@ -14,7 +14,7 @@ A schema defines a label and a set of attributes, and is used to create new obje
 
 ![Schema diagram](https://github.com/CarsonScott/easydata/blob/master/img/4927232E-8D0E-4211-9546-594CF7557A5B.jpeg)
 
-We can define a schema to represent positions in 2D space:
+We can define a schema to represent positions in space:
     
     db = Database()
     db.create_schema('point', ['x', 'y'])

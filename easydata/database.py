@@ -27,23 +27,38 @@ class Database(Dict):
 		self.constraints[schema]=dict()
 		for i in attrs:self.constraints[schema][i]=[]
 	
-	def create_object(self, schema, key, value=None, values=[]):
+	def create_constraint(self, schema, key, proposition):
+		self.constraints[schema][key].append(proposition)
+
+	def create_object(self, schema, key, value=None, values=[], raise_exception=True):
 		self[key]=value
 		attrs=self.schemas[schema]
 		for i in range(len(attrs)):
 			self.set_attr(key,attrs[i],values[i])
 		self.instances[schema].append(key)
 
+		invalid_attrs=[]
 		for attr in self.get_attrs(key):
 			value=self.get_attr(key, attr)
 			constraints=self.constraints[schema][attr]
 			if not all(constraint(value) for constraint in constraints):
-				self.remove_object(key)
-				return False
-		return True
+				invalid_attrs.append(attr)
 
-	def create_constraint(self, schema, key, proposition):
-		self.constraints[schema][key].append(proposition)
+		if len(invalid_attrs) > 0:
+			self.remove_object(key)
+			exception='Object "' + key + '" not created. '
+			if len(invalid_attrs) == 1:
+				exception += 'Attribute '
+			else: exception += 'Attributes '
+
+			for i in range(len(invalid_attrs)):
+				attr=invalid_attrs[i]
+				exception += '"' + attr + '"' 
+				if i < len(invalid_attrs)-1:
+					exception += ','
+				exception += ' '
+			exception += 'not satisfied.'
+			raise Exception(exception)
 	
 	def remove_object(self, key):
 		del self[key]

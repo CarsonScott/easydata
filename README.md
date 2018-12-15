@@ -84,7 +84,7 @@ The individual attributes of an object are accessible through the following meth
 All attributes of an object are accessible as a dictionary:
 
     db.get_attrs('p1')
-    >>> {'x':5, 'y':6, 'z':7}
+    >>> {'x': 5, 'y': 6, 'z': 7}
 
 *** 
 
@@ -111,20 +111,32 @@ __II. Links__
 Links are created using a 'source' and 'target' key, each pointing to an existing object:
 
     >>> graph.create_link('p1', 'p2')
+
+The resulting link is an object with 'source' and 'target' attributes.
     
 Every link is assigned a generated key based on the source and target keys used to define it:
     
     graph.get_key('p1', 'p2')
     >>> '(p1 p2)'
 
-The source and target objects' attributes are updated when a new link is created:
+The attributes of the source and target objects are updated when a new link is created:
 
     graph.get_attrs('p1')
     >>> {'x': 5, 'y': 6, 'sources': [], 'targets': ['p2'])
    
     graph.get_attrs('p2')
     >>> {'x': 3, 'y': 9, 'sources': ['p1'], 'targets': [])
-    
+
+Additional attributes can be added to the link schema:
+
+    graph.create_attribute('link', 'weight', [lambda val: isinstance(val, int) or isinstance(val, float)])
+
+The additional attributes are assigned when a link is created:
+
+    graph.create_link('p1', 'p2', [4])
+
+The link between 'p1' and 'p2' now has an attribute called 'weight', equal to 4.
+
 __III. Hierarchies__
 
 Every link is an object that may be the source or target of another link. 
@@ -132,6 +144,6 @@ Every link is an object that may be the source or target of another link.
 Links between links may be defined in an infinite hierarchy.
 
     graph.get_attrs(graph.get_key('p1', 'p2')) 
-    >>> {'source': 'p1', 'target': 'p2', 'sources': [], 'targets': [])
+    >>> {'source': 'p1', 'target': 'p2', 'weight': 6, 'sources': [], 'targets': [])
 
 ***
